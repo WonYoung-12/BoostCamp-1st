@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +19,7 @@ import android.widget.Toast;
 import com.example.kwy2868.boostcamp_1st.Adapter.ViewPagerAdapter;
 import com.example.kwy2868.boostcamp_1st.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private Toolbar toolbar;
 
@@ -71,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
         viewPager.setCurrentItem(0);
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
-
         // 아래 버튼 4개 연결.
 //        newsButton = (Button)findViewById(R.id.news);
 //        friendButton = (Button)findViewById(R.id.friend);
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
 //        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 //            @Override
 //            public void onTabSelected(TabLayout.Tab tab) {
@@ -147,10 +147,12 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+        // 아이템 클릭했을 때 이동.
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 switch (item.getItemId()){
                     case R.id.news:
                         viewPager.setCurrentItem(0);
@@ -166,6 +168,28 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                 }
                 return false;
+            }
+        });
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(prevBottomNavigation != null){
+                    prevBottomNavigation.setChecked(false);
+                }
+                prevBottomNavigation = bottomNavigationView.getMenu().getItem(position);
+                Log.d("btNV", position+" ");
+                prevBottomNavigation.setChecked(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
 
@@ -215,4 +239,5 @@ public class MainActivity extends AppCompatActivity {
     void share(){
         Toast.makeText(this, "이 게시물을 타 사용자와 공유합니다.", Toast.LENGTH_SHORT).show();
     }
+
 }
