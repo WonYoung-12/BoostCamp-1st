@@ -147,30 +147,40 @@ public class MainActivity extends AppCompatActivity{
 //            }
 //        });
 
+        // 첫 페이지에 대한 정보를 담아두어야 처음 swipe 할 때도 정상 동작함.
+//        prevBottomNavigation = bottomNavigationView.getMenu().getItem(0);
         // 아이템 클릭했을 때 이동.
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch (item.getItemId()){
+//                prevBottomNavigation.setChecked(false);
+                // R.id. 이런식으로 받아옴.
+//                prevBottomNavigation = bottomNavigationView.getMenu().getItem(position);
+                Log.d("Item : ", viewPager.getCurrentItem()+" ");
+                switch (item.getItemId()) {
                     case R.id.news:
                         viewPager.setCurrentItem(0);
-                        return true;
+                        Log.d("Item : ", viewPager.getCurrentItem() + "뉴스피드");
+                        break;
                     case R.id.friend:
                         viewPager.setCurrentItem(1);
-                        return true;
+                        Log.d("Item : ", viewPager.getCurrentItem() + "친구");
+                        break;
                     case R.id.notification:
                         viewPager.setCurrentItem(2);
-                        return true;
+                        Log.d("Item : ", viewPager.getCurrentItem() + "알림");
+                        break;
                     case R.id.setting:
                         viewPager.setCurrentItem(3);
-                        return true;
+                        Log.d("Item : ", viewPager.getCurrentItem() + "설정");
+                        break;
                 }
-                return false;
+                return true;
             }
         });
 
+        // swipe 해서 이동했을 때.
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -181,6 +191,10 @@ public class MainActivity extends AppCompatActivity{
             public void onPageSelected(int position) {
                 if(prevBottomNavigation != null){
                     prevBottomNavigation.setChecked(false);
+                }
+                // prevBottomNavigation이 null일때, 즉 앱을 처음 실행했을 때
+                else{
+                    bottomNavigationView.getMenu().getItem(0).setChecked(false);
                 }
                 prevBottomNavigation = bottomNavigationView.getMenu().getItem(position);
                 Log.d("btNV", position+" ");
