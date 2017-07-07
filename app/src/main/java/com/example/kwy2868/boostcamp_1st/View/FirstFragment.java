@@ -120,6 +120,8 @@ public class FirstFragment extends android.support.v4.app.Fragment {
         updateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                builder.setIcon(R.drawable.ic_menu_black_24dp).setTitle("게시글 작성").setMessage("게시글을 작성하러 갑니다.").setNeutralButton("닫기", null).show();
                 Toast.makeText(getActivity(), "게시글을 작성하러 갑니다.", Toast.LENGTH_SHORT).show();
             }
         });

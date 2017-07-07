@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.kwy2868.boostcamp_1st.Adapter.ViewPagerAdapter;
+import com.example.kwy2868.boostcamp_1st.BottomNavigationViewHelper;
 import com.example.kwy2868.boostcamp_1st.R;
 
 public class MainActivity extends AppCompatActivity{
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity{
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
         viewPager.setCurrentItem(0);
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         // 아래 버튼 4개 연결.
 //        newsButton = (Button)findViewById(R.id.news);
 //        friendButton = (Button)findViewById(R.id.friend);
@@ -146,7 +148,6 @@ public class MainActivity extends AppCompatActivity{
 //
 //            }
 //        });
-
         // 첫 페이지에 대한 정보를 담아두어야 처음 swipe 할 때도 정상 동작함.
 //        prevBottomNavigation = bottomNavigationView.getMenu().getItem(0);
         // 아이템 클릭했을 때 이동.
