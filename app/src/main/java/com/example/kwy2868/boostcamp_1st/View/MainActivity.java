@@ -1,6 +1,7 @@
 package com.example.kwy2868.boostcamp_1st.View;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -53,21 +54,23 @@ public class MainActivity extends AppCompatActivity {
         // 툴바 좌우 여백을 없앤다.
         toolbar.setContentInsetsAbsolute(0, 0);
 
+        // 툴바에 있는 거.
         camera_btn = (ImageButton)findViewById(R.id.camera);
         search = (EditText)findViewById(R.id.search);
         message_btn = (ImageButton)findViewById(R.id.message);
 
-        tabLayout = (TabLayout)findViewById(R.id.tablayout);
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.news));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.friend));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.notification));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.setting2));
+        /// TabLayout 부분.
+//        tabLayout = (TabLayout)findViewById(R.id.tablayout);
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.news));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.friend));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.notification));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.setting2));
 //        얘는 xml 파일 gravity 속성으로도 지정 가능.
 //        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
         viewPager.setCurrentItem(0);
-//        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
 
         // 아래 버튼 4개 연결.
 //        newsButton = (Button)findViewById(R.id.news);
@@ -111,60 +114,60 @@ public class MainActivity extends AppCompatActivity {
         });
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-//                int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.click);
-//                tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
-                switch (tab.getPosition()){
-                    case 0:
-                        viewPager.setCurrentItem(tab.getPosition());
-                        break;
-                    case 1:
-                        viewPager.setCurrentItem(tab.getPosition());
-                        break;
-                    case 2:
-                        viewPager.setCurrentItem(tab.getPosition());
-                        break;
-                    case 3:
-                        viewPager.setCurrentItem(tab.getPosition());
-                        break;
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-//                int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.nonclick);
-//                tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+////                int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.click);
+////                tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+//                switch (tab.getPosition()){
+//                    case 0:
+//                        viewPager.setCurrentItem(tab.getPosition());
+//                        break;
+//                    case 1:
+//                        viewPager.setCurrentItem(tab.getPosition());
+//                        break;
+//                    case 2:
+//                        viewPager.setCurrentItem(tab.getPosition());
+//                        break;
+//                    case 3:
+//                        viewPager.setCurrentItem(tab.getPosition());
+//                        break;
+//                }
+//            }
 //
 //            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId()){
-//                    case R.id.news:
-//                        viewPager.setCurrentItem(0);
-//                        return true;
-//                    case R.id.friend:
-//                        viewPager.setCurrentItem(1);
-//                        return true;
-//                    case R.id.notification:
-//                        viewPager.setCurrentItem(2);
-//                        return true;
-//                    case R.id.setting:
-//                        viewPager.setCurrentItem(3);
-//                        return true;
-//                }
-//                return false;
+//            public void onTabUnselected(TabLayout.Tab tab) {
+////                int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.nonclick);
+////                tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
 //            }
 //        });
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.news:
+                        viewPager.setCurrentItem(0);
+                        return true;
+                    case R.id.friend:
+                        viewPager.setCurrentItem(1);
+                        return true;
+                    case R.id.notification:
+                        viewPager.setCurrentItem(2);
+                        return true;
+                    case R.id.setting:
+                        viewPager.setCurrentItem(3);
+                        return true;
+                }
+                return false;
+            }
+        });
 
 //        newsButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
